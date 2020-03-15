@@ -1,41 +1,46 @@
-ARCH
-----
-The ARCH toolbox currently contains routines for
+.. image:: images/color-logo.svg
+   :width: 33.3%
+   :alt: arch logo
 
-- Univariate volatility models
-- Bootstrapping
-- Multiple comparison procedures
-- Unit root tests
+Introduction
+============
+
+The ARCH toolbox contains routines for:
+
+- Univariate volatility models;
+- Bootstrapping;
+- Multiple comparison procedures;
+- Unit root tests; and
+- Long-run covariance estimation.
 
 Future plans are to continue to expand this toolbox to include additional
 routines relevant for the analysis of financial data.
 
-Contents
-========
-
 .. toctree::
     :maxdepth: 2
+    :hidden:
 
     Univariate Volatility Models <univariate/univariate>
     Bootstrapping <bootstrap/bootstrap>
     Multiple Comparison Problems <multiple-comparison/multiple-comparisons>
     Unit Root Tests <unitroot/unitroot>
+    Long-run Covariance Estimation <covariance/covariance>
     Change Log <changes>
 
 Citation
 ========
-This package should be cited using Zenodo. For example, for the 4.6 release,
+This package should be cited using Zenodo. For example, for the 4.13 release,
 
-.. [*] Kevin Sheppard. (2018, December 13). bashtage/arch: Release 4.7.0 (Version 4.7.0).
-   Zenodo. https://doi.org/10.5281/zenodo.2240590
+.. [*] Kevin Sheppard. (2019, March 28). bashtage/arch: Release 4.13 (Version 4.13).
+   Zenodo. https://zenodo.org/record/593254
 
-.. image:: https://zenodo.org/badge/23468876.svg
-   :target: https://zenodo.org/badge/latestdoi/23468876
+.. image:: https://zenodo.org/badge/doi/10.5281/zenodo.3551028.svg
+   :target: https://doi.org/10.5281/zenodo.593254
 
-Indices and tables
-==================
+Index
+=====
 
 * :ref:`genindex`
 * :ref:`modindex`
-* :ref:`search`
+
 

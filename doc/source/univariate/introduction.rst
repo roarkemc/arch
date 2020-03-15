@@ -15,18 +15,17 @@ as
 
 A complete ARCH model is divided into three components:
 
+* a :ref:`mean model<mean-models>`, e.g., a constant mean or an :class:`~arch.univariate.mean.ARX`;
+* a :ref:`volatility process<volatility-processes>`, e.g., a :class:`~arch.univariate.volatility.GARCH` or an :class:`~arch.univariate.volatility.EGARCH` process; and
+* a :ref:`distribution<distributions>` for the standardized residuals.
 
-..
-.. Theoretical Background <background>
-..
-
-However, the simplest method to construct this model is to use the constructor
-function :py:meth:`~arch.arch_model`
+In most applications, the simplest method to construct this model is to use the constructor
+function :meth:`~arch.arch_model`
 
 .. code-block:: python
 
     import datetime as dt
-    
+
     import pandas_datareader.data as web
 
     from arch import arch_model
@@ -85,7 +84,7 @@ yields
 
 ::
 
-                         Constant Mean - GARCH Model Results                      
+                         Constant Mean - GARCH Model Results
     ==============================================================================
     Dep. Variable:              Adj Close   R-squared:                      -0.001
     Mean Model:             Constant Mean   Adj. R-squared:                 -0.001
@@ -95,12 +94,12 @@ yields
                                             No. Observations:                 3520
     Date:                Fri, Dec 02 2016   Df Residuals:                     3516
     Time:                        22:22:28   Df Model:                            4
-                                      Mean Model                                  
+                                      Mean Model
     ==============================================================================
                      coef    std err          t      P>|t|        95.0% Conf. Int.
     ------------------------------------------------------------------------------
     mu             0.0531  1.487e-02      3.569  3.581e-04   [2.392e-02,8.220e-02]
-                                   Volatility Model                               
+                                   Volatility Model
     ==============================================================================
                      coef    std err          t      P>|t|        95.0% Conf. Int.
     ------------------------------------------------------------------------------
@@ -112,26 +111,10 @@ yields
     Covariance estimator: robust
 
 
-Core Model Constructor
-======================
+Model Constructor
+=================
 While models can be carefully specified using the individual components, most common specifications can be specified
 using a simple model constructor.
 
-.. py:currentmodule:: arch
+.. currentmodule:: arch
 .. autofunction:: arch_model
-
-
-Model Results
-=============
-All model return the same object, a results class (:py:class:`ARCHModelResult`)
-
-.. py:currentmodule:: arch.univariate.base
-.. autoclass:: ARCHModelResult
-   :members: summary, forecast, conf_int, plot, hedgehog_plot, arch_lm_test
-
-When using the ``fix`` method, a (:py:class:`ARCHModelFixedResult`) is produced
-that lacks some properties of a (:py:class:`ARCHModelResult`) that are not
-relevant when parameters are not estimated.
-
-.. autoclass:: ARCHModelFixedResult
-   :members: summary, forecast, plot, hedgehog_plot, arch_lm_test

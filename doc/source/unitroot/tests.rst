@@ -1,46 +1,25 @@
 The Unit Root Tests
 ===================
 
-.. module::arch.unitroot
-.. py:currentmodule:: arch.unitroot
+.. module:: arch.unitroot
+   :synopsis: Unit root tests
 
+.. currentmodule:: arch.unitroot
 
-Augmented-Dickey Fuller Testing
--------------------------------
+.. autosummary::
+   :toctree: generated/
 
-.. autoclass:: ADF
-   :members: stat, pvalue, critical_values, summary, regression, trend, lags, null_hypothesis, alternative_hypothesis, valid_trends
+   ADF
+   DFGLS
+   PhillipsPerron
+   ZivotAndrews
+   VarianceRatio
+   KPSS
 
+Automatic Bandwidth Selection
+-----------------------------
 
-Dickey-Fuller GLS Testing
--------------------------
+.. autosummary::
+   :toctree: generated/
 
-.. autoclass:: DFGLS
-   :members: summary
-
-
-Phillips-Perron Testing
------------------------
-
-.. autoclass:: PhillipsPerron
-   :members: summary
-
-Zivot-Andrews Testing
----------------------
-
-.. autoclass:: ZivotAndrews
-   :members: summary
-
-
-Variance Ratios
----------------
-
-.. autoclass:: VarianceRatio
-   :members: summary
-
-
-KPSS Testing
-------------
-
-.. autoclass:: KPSS
-   :members: summary
+   auto_bandwidth

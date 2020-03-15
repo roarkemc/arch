@@ -1,5 +1,57 @@
-Changes since 4.8.1
-===================
+=========
+Version 4
+=========
+
+Since 4.12
+==========
+- Issue warnings when unit root tests are mutated. Will raise after 5.0
+  is released.
+- Fixed a bug in :class:`arch.univariate.SkewStudent` which did not use the
+  user-provided `RandomState` when one was provided. This prevented
+  reproducing simulated values (:issue:`353`).
+
+Release 4.12
+============
+- Added typing support to all classes, functions and methods (:issue:`338`,
+  :issue:`341`, :issue:`342`, :issue:`343`, :issue:`345`, :issue:`346`).
+- Fixed an issue that caused tests to fail on SciPy 1.4+ (:issue:`339`).
+- Dropped support for Python 3.5 inline with NEP 29 (:issue:`334`).
+- Added methods to compute moment and lower partial moments for standardized
+  residuals. See, for example, :func:`~arch.univariate.SkewStudent.moment` and
+  :func:`~arch.univariate.SkewStudent.partial_moment` (:issue:`329`).
+- Fixed a bug that produced an OverflowError when a time series has no
+  variance (:issue:`331`).
+
+Release 4.11
+============
+- Added :func:`~arch.univariate.base.ARCHModelResult.std_resid` (:issue:`326`).
+- Error if inputs are not ndarrays, DataFrames or Series (:issue:`315`).
+- Added a check that the covariance is non-zero when using "studentized" confidence intervals.
+  If the function bootstrapped produces statistics with 0 variance, it is not possible to
+  studentized (:issue:`322`).
+
+Release 4.10
+============
+- Fixed a bug in arch_lm_test that assumed that the model data is contained in
+  a pandas Series. (:issue:`313`).
+- Fixed a bug that can affect use in certain environments that reload modules
+  (:issue:`317`).
+
+Release 4.9
+===========
+- Removed support for Python 2.7.
+- Added :func:`~arch.unitroot.auto_bandwidth` to compute optimized bandwidth
+  for a number of common kernel covariance estimators (:issue:`303`). This code
+  was written by Michael Rabba.
+- Added a parameter `rescale` to :func:`~arch.univariate.mean.arch_model`
+  that allows the estimator to rescale data if it may help parameter
+  estimation. If `rescale=True`, then the data will be rescaled by a power
+  of 10 (e.g., 10, 100, or 1000) to produce a series with a residual
+  variance between 1 and 1000. The model is then estimated on the rescaled
+  data. The scale is reported :func:`~arch.univariate.base.ARCHModelResult.scale`.
+  If `rescale=None`, a warning is produced if the data appear to be poorly
+  scaled, but no change of scale is applied. If `rescale=False`, no scale
+  change is applied and no warning is issued.
 - Fixed a bug when using the BCA bootstrap method where the leave-one-out
   jackknife used the wrong centering variable (:issue:`288`).
 - Added :func:`~arch.univariate.base.ARCHModelResult.optimization_result` to

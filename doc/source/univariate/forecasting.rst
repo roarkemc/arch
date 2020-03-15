@@ -15,7 +15,7 @@ All models support three methods of forecasting:
 * Simulation: simulation-based forecasts are always available for any
   horizon, although they are only useful for horizons larger than 1 since
   the first out-of-sample forecast from an ARCH-type model is always fixed.
-  Simulation-based forecasts make use fo the structure of an ARCH-type model
+  Simulation-based forecasts make use of the structure of an ARCH-type model
   to forward simulate using the assumed distribution of residuals, e.g., a
   Normal or Student's t.
 * Bootstrap: bootstrap-based forecasts are similar to simulation based
@@ -89,7 +89,7 @@ Simulation Forecasts
 ~~~~~~~~~~~~~~~~~~~~
 Simulation-based forecasts use the model random number generator to simulate
 draws of the standardized residuals, :math:`e_{t+h}`.  These are used to
-generate a pre-specified number of paths fof the variances which are then
+generate a pre-specified number of paths of the variances which are then
 averaged to produce the forecasts.  In models like GARCH which evolve in the
 squares of the residuals, there are few advantages to simulation-based
 forecasting. These methods are more valuable when producing multi-step
@@ -147,13 +147,13 @@ data available at time :math:`t` are used to simulate the paths.
 
 Forecasting Options
 ~~~~~~~~~~~~~~~~~~~
-The :py:meth:`~arch.univariate.base.ARCHModelResult.forecast`  method
+The :meth:`~arch.univariate.base.ARCHModelResult.forecast`  method
 is attached to a model fit result.`
 
 * ``params`` - The model parameters used to forecast the mean and variance.
   If not specified, the parameters estimated during the call to ``fit``
   the produced the result are used.
-* ``horizon`` - A positve integer value indicating the maximum horizon to
+* ``horizon`` - A positive integer value indicating the maximum horizon to
   produce forecasts.
 * ``start`` - A positive integer or, if the input to the mode is a DataFrame,
   a date (string, datetime, datetime64 or Timestamp). Forecasts are produced
@@ -173,8 +173,8 @@ is attached to a model fit result.`
 
 Understanding Forecast Output
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Any call to :py:meth:`~arch.univariate.base.ARCHModelResult.forecast` returns a
-:py:class:`~arch.univariate.base.ARCHModelForecast` object with has 3 core
+Any call to :meth:`~arch.univariate.base.ARCHModelResult.forecast` returns a
+:class:`~arch.univariate.base.ARCHModelForecast` object with has 3 core
 attributes and 1 which may be useful when using simulation- or bootstrap-based
 forecasts.
 
@@ -237,7 +237,7 @@ that are not forecast are ``nan`` filled.
 
 Output Classes
 ~~~~~~~~~~~~~~
-.. py:currentmodule:: arch.univariate.base
+.. currentmodule:: arch.univariate.base
 
 .. autoclass:: ARCHModelForecast
 
