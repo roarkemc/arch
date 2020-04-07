@@ -228,7 +228,11 @@ if __name__ == "__main__":
     print(f"Total configuration: {nconfig}, Remaining: {nremconfig}")
 
     shuffle(remaining_configs)
-    Parallel(verbose=50, n_jobs=njobs)(
-        delayed(partial_block)(rg, trend=trend, idx=idx)
-        for ((idx, rg), trend) in remaining_configs
-    )
+    if njobs == 1:
+        for ((idx, rg), trend) in remaining_configs:
+            partial_block(rg, trend=trend, idx=idx)
+    else:
+        Parallel(verbose=50, n_jobs=njobs)(
+            delayed(partial_block)(rg, trend=trend, idx=idx)
+            for ((idx, rg), trend) in remaining_configs
+        )

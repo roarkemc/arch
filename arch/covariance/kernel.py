@@ -26,6 +26,21 @@ __all__ = [
     "NeweyWest",
 ]
 
+KERNELS = [
+    "Bartlett",
+    "Parzen",
+    "ParzenCauchy",
+    "ParzenGeometric",
+    "ParzenRiesz",
+    "TukeyHamming",
+    "TukeyHanning",
+    "TukeyParzen",
+    "QuadraticSpectral",
+    "Andrews",
+    "Gallant",
+    "NeweyWest",
+]
+
 
 class CovarianceEstimate(object):
     r"""
@@ -121,7 +136,7 @@ class CovarianceEstimate(object):
 
 class CovarianceEstimator(ABC):
     r"""
-    Covariance estimation using %(kernel_name)s kernel.
+    %(kernel_name)s kernel covariance estimation.
 
     Parameters
     ----------
@@ -388,6 +403,13 @@ class CovarianceEstimator(ABC):
         labels = self._x_orig.columns if isinstance(self._x_orig, DataFrame) else None
         return CovarianceEstimate(sr, oss, labels)
 
+    @property
+    def force_int(self) -> bool:
+        """
+        Flag indicating whether the bandwidth is restricted to be an integer.
+        """
+        return self._force_int
+
 
 bartlett_formula = """\
 w=\\begin{cases} 1-\\left|z\\right| & z\\leq1 \\\\ 0 & z>1 \\end{cases}
@@ -454,7 +476,7 @@ w=\\begin{cases} \
 """
 
 
-@Substitution(kernel_name="the Parzen-Reisz", formula=parzen_reisz_formula)
+@Substitution(kernel_name="Parzen-Reisz", formula=parzen_reisz_formula)
 class ParzenRiesz(CovarianceEstimator, metaclass=AbstractDocStringInheritor):
     @property
     def kernel_const(self) -> float:
@@ -538,7 +560,7 @@ w=\\begin{cases} \
 """
 
 
-@Substitution(kernel_name="the Tukey-Hamming", formula=tukey_hamming_formula)
+@Substitution(kernel_name="Tukey-Hamming", formula=tukey_hamming_formula)
 class TukeyHamming(CovarianceEstimator, metaclass=AbstractDocStringInheritor):
     @property
     def kernel_const(self) -> float:
@@ -566,7 +588,7 @@ w=\\begin{cases} \
 """
 
 
-@Substitution(kernel_name="the Tukey-Hanning", formula=tukey_hanning_formula)
+@Substitution(kernel_name="Tukey-Hanning", formula=tukey_hanning_formula)
 class TukeyHanning(CovarianceEstimator, metaclass=AbstractDocStringInheritor):
     @property
     def kernel_const(self) -> float:
@@ -594,7 +616,7 @@ w=\\begin{cases} \
 """
 
 
-@Substitution(kernel_name="the Tukey-Parzen", formula=tukey_parzen_formula)
+@Substitution(kernel_name="Tukey-Parzen", formula=tukey_parzen_formula)
 class TukeyParzen(CovarianceEstimator, metaclass=AbstractDocStringInheritor):
     @property
     def kernel_const(self) -> float:
@@ -614,7 +636,7 @@ class TukeyParzen(CovarianceEstimator, metaclass=AbstractDocStringInheritor):
         return 0.436 + 0.564 * np.cos(np.pi * x)
 
 
-qs_name = "the Quadratic-Spectral (Andrews')"
+qs_name = "Quadratic-Spectral (Andrews')"
 qs_formula = """\
 w=\\begin{cases} \
 1 & z=0\\\\ \
@@ -640,11 +662,12 @@ class QuadraticSpectral(CovarianceEstimator, metaclass=AbstractDocStringInherito
     def _weights(self) -> NDArray:
         bw = self.bandwidth
         nobs = self._x.shape[0]
-        w = np.empty(nobs)
+        w = np.zeros(nobs)
         w[0] = 1.0
-        x = np.arange(1, nobs) / bw
-        z = 6 * np.pi * x / 5
-        w[1:] = 3 / z ** 2 * (np.sin(z) / z - np.cos(z))
+        if bw > 0:
+            x = np.arange(1, nobs) / bw
+            z = 6 * np.pi * x / 5
+            w[1:] = 3 / z ** 2 * (np.sin(z) / z - np.cos(z))
         return w
 
 
@@ -660,7 +683,7 @@ class Gallant(Parzen):
 
 class Andrews(QuadraticSpectral):
     """
-    Alternative name for QuadraticSpectral covariance estimator.
+    Alternative name of the QuadraticSpectral covariance estimator.
 
     See Also
     --------

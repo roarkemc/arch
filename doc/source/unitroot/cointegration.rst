@@ -10,4 +10,24 @@ Cointegration Tests
    :toctree: generated/
 
    engle_granger
-   EngleGrangerCointegrationTestResult
+   phillips_ouliaris
+
+Cointegrating Vector Estimation
+===============================
+.. autosummary::
+   :toctree: generated/
+
+   DynamicOLS
+   FullyModifiedOLS
+   CanonicalCointegratingReg
+
+Results Classes
+---------------
+
+.. autosummary::
+   :toctree: generated/
+
+   CointegrationAnalysisResults
+   DynamicOLSResults
+   EngleGrangerTestResults
+   PhillipsOuliarisTestResults
