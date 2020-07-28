@@ -1264,8 +1264,8 @@ class ARCHModelFixedResult(_SummaryRepr):
 
         >>> fig = res.plot(scale=360)
         """
-        from matplotlib.pyplot import figure
         from matplotlib.axes import Axes
+        from matplotlib.pyplot import figure
 
         def _set_tight_x(
             axis: Axes, index: Tuple[Union[float, DateLike], Union[float, DateLike]]
@@ -1388,6 +1388,8 @@ class ARCHModelFixedResult(_SummaryRepr):
                 or params.ndim != self._params.ndim
             ):
                 raise ValueError("params have incorrect dimensions")
+        if not isinstance(horizon, (int, np.integer)) or horizon < 1:
+            raise ValueError("horizon must be an integer >= 1.")
         return self.model.forecast(
             params, horizon, start, align, method, simulations, rng, random_state
         )
